@@ -8,6 +8,10 @@ spring:
   profiles:
     include: oauth
 
+  session:
+    store-type: jdbc
+    jdbc.initialize-schema: always
+
   jpa:
     hibernate:
       ddl-auto: create
