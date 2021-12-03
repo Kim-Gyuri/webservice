@@ -18,7 +18,7 @@ public class TestDataInit {
      */
     @PostConstruct
     public void init() {
-        postsRepository.save(new Posts("테스트1", "test1@gmail.com", "테스트1의 본문"));
+        postsRepository.save(new Posts("title", "content", "테스트1의 본문"));
 
     }
 
