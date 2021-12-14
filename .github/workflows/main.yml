@@ -36,7 +36,7 @@ jobs:
       - name: Generate deployment package # (1)
         run: |
           mkdir -p deploy
-          cp ./build/libs/*.jar deploy/application.jar
+          cp build/libs/*.jar deploy/application.jar
           cp Procfile deploy/Procfile
           cp -r .ebextensions deploy/.ebextensions
           cp -r .platform deploy/.platform
@@ -48,7 +48,7 @@ jobs:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: myspringboot-webervice
-          environment_name: myspringboot-webervice
+          environment_name: Myspringbootwebservice-env
           version_label: github-action-${{steps.current-time.outputs.formattedTime}}
           region: ap-northeast-2
           deployment_package: deploy/deploy.zip  
