@@ -32,10 +32,6 @@ jobs:
         with:
           format: YYYY-MM-DDTHH-mm-ss
           utcOffset: "+09:00"
-
-      - name: Show Current Time
-        run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}"
-        shell: bash
         
       - name: Generate deployment package # (1)
         run: |
@@ -48,7 +44,6 @@ jobs:
 
       - name: Beanstalk Deploy
         uses: einaregilsson/beanstalk-deploy@v19
-
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
