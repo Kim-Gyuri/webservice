@@ -47,8 +47,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: myspringboot-webervice
-          environment_name: myspringboot-webervice
+          application_name: thumper-springboot2-webervice
+          environment_name: Thumperspringboot2webervice-env
           version_label: github-action-${{steps.current-time.outputs.formattedTime}}
           region: ap-northeast-2
           deployment_package: deploy/deploy.zip  
