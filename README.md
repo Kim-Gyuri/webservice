@@ -27,7 +27,8 @@ select @@time_zone, now();
 >계정: 인텔리제이에서 RDS 접속 정보 등록했던 User를 적는다.<br>
 >host 주소: RDS의 엔드포엔트 주소<br>
 >다음 페이지 290의 '테스트 테이블 생성하기'도 ec2 리눅스로 실행시켜 확인했다.<br>
-## 2. 배포 스크립트 만들기 <br>
+
+## 2. 배포 스크립트 만들기 
 ### ./gradlew test 실행 중 오류 <br>
 * 오류 화면<br>
 ![javahome못찾아](https://user-images.githubusercontent.com/57389368/146330020-be34cccd-6f3f-447d-8932-5b003da14bc6.JPG)<br>
