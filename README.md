@@ -1,13 +1,27 @@
 # :pushpin: 스프링 부트와 AWS로 구현하는 웹 서비스
-+ 실습 도중에 어려웠던 것들, 겪었던 오류들, 배운 것을 
++ 실습 도중에 어려웠던 것들, 겪었던 오류들, 배운 것들을 정리해보자.
 
-## Table of contents 목차
-+ 실습 도중에 어려웠던 것들<br>
+## 목차
+[0. EC2 Network Error Connection timeout 오류](#0-EC2-Network-Error-Connection-timeout-오류)<br>
 [1. Amazon Linux 인스턴스의 호스트 이름 변경](#1-Amazon-Linux-인스턴스의-호스트-이름-변경)<br>
 [2. 내 PC에서 RDS에 접속하기](#2-내-PC에서-RDS에-접속하기)<br>
 [3. 배포 스크립트 만들기](#3-배포-스크립트-만들기)<br>
++ ./gradlew test 실행 중 오류
++ 자바를 설치했지만 또 다시 ./gradlew test 오류발생
++ deploy.sh 파일 작성 중, 책 오타 수정
++ deploy 실행시 Unable to access jarfile 오류
++ 스프링 부트 프로젝트로 RDS 접근하기
++ curl localhost:8080시 나타나는 에러
+
 [4. Travis CI 연동하기](#4-Travis-CI-연동하기)<br>
 [5. Git Actions으로 연동하기](#5-Git-Actions으로-연동하기)<br>
+[5. Git Actions으로 연동하기](#5-Git-Actions으로-연동하기)<br>
+[6. aws 프리 티어는 무료가 아니다](#6-aws-프리-티어는-무료가-아니다)<br>
+[7. 생각 회고](#7-생각-회고)<br>
+
+## 0. EC2 Network Error Connection timeout 오류
+* 보안 그룹 > 인바운드 규칙 보기 탭으로 들어가서 SSH, 위치무관 규칙을 추가한다.
+![ec2 위치무관](https://user-images.githubusercontent.com/57389368/146396869-50cb1229-910e-4c9c-ad60-653673e80d4d.JPG)
 
 ## 1. Amazon Linux 인스턴스의 호스트 이름 변경
 * Hostname 변경 : <br>
@@ -180,6 +194,14 @@ nohup java -jar \
     $REPOSITORY/$JAR_NAME 2>&1 &
 ```    
 
+### curl localhost:8080시 나타나는 에러
+* 오류 분석: <br>
+"단순히 생각해서 pid를 못 찾는 구나" 라고 생각했었다. 검색해보니 프로젝트의 deploy.sh에서 PID를 찾을 때 grep 으로 실행중인 jar 파일을 찾고 있었어서 PID를 찾지 못한것 같아 jar를 java로 바꿨더니 바로 PID를 찾을 수 있었다는 글을 읽고 deploy.sh를 고쳐보니 해결되었다. <br>
+```
+CURRENT_PID=$(pgrep -fl 프로젝트명 | grep java | awk '{print $1}') 
+```
+>[참고자료: pid 찾기](https://giters.com/jojoldu/freelec-springboot2-webservice/issues/688)<br>
+
 ## 4. Travis CI 연동하기
 * travis-ci.org 2020년에 문 닫았으므로 'tavis-ci.com'으로 옮겨야 한다. [Travis](https://app.travis-ci.com)<br>
 * Github - Travis 연동 에러 
@@ -190,6 +212,25 @@ nohup java -jar \
 
 ## 5. Git Actions으로 연동하기
 * 최근 대세가 TravisCI에서 Github Action으로 넘어갔음이 느껴져 Github Action과 Beanstalk 조합으로 서버 배포하는 실습을 해본다.
->참고 
+>참고 <br>
 >[1. Github Action & AWS Beanstalk 배포하기 - Github Action으로 빌드하기](https://jojoldu.tistory.com/543?category=777282)<br>
 >[2. Github Action & AWS Beanstalk 배포하기 - profile=local로 배포하기](https://jojoldu.tistory.com/549?category=777282)<br>
+
+
+## 6. aws 프리 티어는 무료가 아니다
+* AWS EC2의 free tier를 지원하는 t2.micro을 사용하면서 지출되는 금액을 말한다, 나의 경우 아래와 같이 청구서를 받았다.
+![aws 1](https://user-images.githubusercontent.com/57389368/146390590-63aaef0d-7cb9-4daf-85d2-eee42eda0c45.JPG)
+![aws 2](https://user-images.githubusercontent.com/57389368/146390668-de7517f3-c2d0-40ee-ad26-2a5ab8d82337.JPG)
+>참고자료: <br>
+>[[AWS] Free-tier로 RDS 사용 중 요금](https://velog.io/@arara90/AWS-Free-tier%EB%A1%9C-RDS-%EC%82%AC%EC%9A%A9-%EC%A4%91-%EC%9A%94%EA%B8%88%EC%9D%84-%EC%A7%80%EB%B6%88%ED%96%88%EC%96%B4%EC%9A%94)<br>
+
+
+## 7. 생각 회고
+ * 책을 통한 학습이기 때문에 무엇보다 '실습 도구들의 버전업', '서비스 배포 관련 사이트(aws, travis) 정책변화' 등등 너무 많은 변화가 있다보니, 학습을 따라가기가 솔직히 힘들었었고 특히 aws 사용에 익숙하지 않아 많은 삽질을 했던 것 같아요. <br>
+* 자바나 gradle 버전에 따라 추가 설정이 있어야 정상실행이 될 수도 있다는 점을 다시 한 번 느꼈다. <br>
+* travis 배포과정에서 비자카드가 없어 제 2의 루트 'Git Actions'으로 연동하려는 과정에서 'EB :severe' 문제를 겪었다. 해당 오류에 대해 구글링 시도 했지만 해결책을 찾지 못했다. <br>
+```
+Environment health has transitioned from Ok to Degraded. 20.0 % of the requests are failing with HTTP 5xx.
+```
+
+* 일단 여기까지 학습한 자신을 위로하며, 책을 다시 읽어보고 aws, 무중단 배포에 대해 정리해보고 새 프로젝트를 만들고자 한다. 다시 화이팅,,,
