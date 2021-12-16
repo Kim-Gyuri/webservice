@@ -226,11 +226,11 @@ CURRENT_PID=$(pgrep -fl 프로젝트명 | grep java | awk '{print $1}')
 
 
 ## 7. 생각 회고
- * 책을 통한 학습이기 때문에 무엇보다 '실습 도구들의 버전업', '서비스 배포 관련 사이트(aws, travis) 정책변화' 등등 너무 많은 변화가 있다보니, 학습을 따라가기가 솔직히 힘들었었고 특히 aws 사용에 익숙하지 않아 많은 삽질을 했던 것 같아요. <br>
+ * 책을 통한 학습이기 때문에 무엇보다 '실습 도구들의 버전업', '서비스 배포 관련 사이트(aws, travis) 정책변화' 등등 너무 많은 변화가 있다보니, 학습을 따라가기가 솔직히 힘들었었고 특히 aws 사용에 익숙하지 않아 많은 삽질을 했던 것 같다. <br>
 * 자바나 gradle 버전에 따라 추가 설정이 있어야 정상실행이 될 수도 있다는 점을 다시 한 번 느꼈다. <br>
 * travis 배포과정에서 비자카드가 없어 제 2의 루트 'Git Actions'으로 연동하려는 과정에서 'EB :severe' 문제를 겪었다. 해당 오류에 대해 구글링 시도 했지만 해결책을 찾지 못했다. <br>
 ```
-Environment health has transitioned from Ok to Degraded. 20.0 % of the requests are failing with HTTP 5xx.
+Environment health has transitioned from Ok to Severe. 75.0 % of the requests are failing with HTTP 5xx.
 ```
 
 * 일단 여기까지 학습한 자신을 위로하며, 책을 다시 읽어보고 aws, 무중단 배포에 대해 정리해보고 새 프로젝트를 만들고자 한다. 다시 화이팅,,,
