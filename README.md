@@ -6,6 +6,8 @@
 [1. Amazon Linux 인스턴스의 호스트 이름 변경](#1-Amazon-Linux-인스턴스의-호스트-이름-변경)<br>
 [2. 내 PC에서 RDS에 접속하기](#2-내-PC에서-RDS에-접속하기)<br>
 [3. 배포 스크립트 만들기](#3-배포-스크립트-만들기)<br>
+[4. Travis CI 연동하기](#4-Travis-CI-연동하기)<br>
+[5. Git Actions으로 연동하기](#5-Git-Actions으로-연동하기)<br>
 
 ## 1. Amazon Linux 인스턴스의 호스트 이름 변경
 * Hostname 변경 : <br>
@@ -159,7 +161,7 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialec
 spring.session.store-type=jdbc
 ```
 
-*
+* src/main/resources/application-real-db.properties
 ```
 spring.jpa.hibernate.ddl-auto=none
 spring.jpa.show_sql=false
@@ -177,3 +179,17 @@ nohup java -jar \
     -Dspring.profiles.active=real \
     $REPOSITORY/$JAR_NAME 2>&1 &
 ```    
+
+## 4. Travis CI 연동하기
+* travis-ci.org 2020년에 문 닫았으므로 'tavis-ci.com'으로 옮겨야 한다. [Travis](https://app.travis-ci.com)<br>
+* Github - Travis 연동 에러 
+![324캡처](https://user-images.githubusercontent.com/57389368/146386291-ce96329a-b79a-477c-b5e5-da5033e281b6.JPG)
+* 2020년부터 Travis CI 서비스는 10,000 크레딧 제공에 차감식으로 지원하는 시스템으로 바뀌었다, <br>
+  비자 카드를 등록하고 무료 플랜으로 가입해야만 깃허브 저장소 활성화가 가능하다. <br>
+
+
+## 5. Git Actions으로 연동하기
+* 최근 대세가 TravisCI에서 Github Action으로 넘어갔음이 느껴져 Github Action과 Beanstalk 조합으로 서버 배포하는 실습을 해본다.
+>참고 
+>[1. Github Action & AWS Beanstalk 배포하기 - Github Action으로 빌드하기](https://jojoldu.tistory.com/543?category=777282)<br>
+>[2. Github Action & AWS Beanstalk 배포하기 - profile=local로 배포하기](https://jojoldu.tistory.com/549?category=777282)<br>
