@@ -15,7 +15,6 @@
 
 [4. Travis CI 연동하기](#4-Travis-CI-연동하기)<br>
 [5. Git Actions으로 연동하기](#5-Git-Actions으로-연동하기)<br>
-[5. Git Actions으로 연동하기](#5-Git-Actions으로-연동하기)<br>
 [6. aws 프리 티어는 무료가 아니다](#6-aws-프리-티어는-무료가-아니다)<br>
 [7. 생각 회고](#7-생각-회고)<br>
 
